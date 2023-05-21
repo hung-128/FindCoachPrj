@@ -30,13 +30,38 @@ export default {
     CoachItem,
     CoachFilter,
   },
-  props: [],
+  data() {
+    return {
+      filterd: {
+        frontend: true,
+        backend: true,
+        career: true,
+      },
+    };
+  },
   computed: {
     filteredCoaches() {
-      return this.$store.getters['coaches/coaches'];
+      const coaches = this.$store.getters['coaches/coaches'];
+
+      return coaches.filter((coach) => {
+        if (this.filterd.frontend && coach.areas.includes('frontend')) {
+          return true;
+        } else if (this.filterd.backend && coach.areas.includes('backend')) {
+          return true;
+        } else if (this.filterd.career && coach.areas.includes('career')) {
+          return true;
+        } else {
+          return false;
+        }
+      });
     },
     hasCoaches() {
       return this.$store.getters['coaches/hasCoaches'];
+    },
+  },
+  methods: {
+    updateFilter(newFilter) {
+      this.filterd = newFilter;
     },
   },
 };

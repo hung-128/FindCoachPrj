@@ -2,15 +2,15 @@
   <base-card>
     <h2>Find your coach</h2>
     <span class="filter-option">
-      <input type="checkbox" id="frontend" checked @change="setFilter()" />
+      <input type="checkbox" id="frontend" checked @change="setFilter" />
       <label for="frontend">Frontend</label>
     </span>
     <span class="filter-option">
-      <input type="checkbox" id="backend" checked />
+      <input type="checkbox" id="backend" checked @change="setFilter" />
       <label for="frontend">Backend</label>
     </span>
     <span class="filter-option">
-      <input type="checkbox" id="career" checked />
+      <input type="checkbox" id="career" checked @change="setFilter" />
       <label for="frontend">Career</label>
     </span>
   </base-card>
@@ -34,6 +34,7 @@ export default {
         ...this.filterd,
         [inputId]: isActive,
       };
+      this.filterd = newFilter;
       this.$emit('update-filter', newFilter);
     },
   },
